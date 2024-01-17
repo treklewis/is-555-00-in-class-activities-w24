@@ -8,6 +8,29 @@ df <- starwars
 # glimpse turns a data frame on its side. Super useful.
 df %>%
   glimpse()
+
+# selects random 20% of data to display
+df %>% 
+  slice_sample(prop=.2)
+
+# bring back top height for each group
+df %>% 
+  group_by(species) %>% 
+  slice_max(height)
+
+# arbitrary exclusion of tied values
+df %>% 
+  group_by(species) %>% 
+  slice_min(height, with_ties = F)
+
+# sort parameter in count function
+df %>% 
+  count(height, sort=T)
+
+df %>% 
+  group_by(homeworld, gender) %>% 
+  summarize(count = n(),
+            avg_birth_year = mean(birth_year, na.rm = T))
   
 
 
